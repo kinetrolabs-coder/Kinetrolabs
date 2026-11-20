@@ -1,0 +1,12 @@
+node_modules
+.npm-cache
+.next
+.env*.local
+coverage
+*.tsbuildinfo
+supabase/.temp
+data/registrations.json
+data/site-content.json
+
+.vercel
+.env*

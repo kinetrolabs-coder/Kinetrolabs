@@ -1,0 +1,20 @@
+export type Service = { id: string; title: string; description: string; icon: string; is_active: boolean; sort_order: number };
+export type SiteContent = {
+  heroHeadline: string;
+  heroDescription: string;
+  heroBackgroundImage: string;
+  about: string;
+  registrationHeading: string;
+  registrationDescription: string;
+  contactEmail: string;
+  whatsapp: string;
+  address: string;
+  linkedin: string;
+  instagram: string;
+  footerText: string;
+  seoTitle: string;
+  seoDescription: string;
+  privacyPolicy: string;
+  terms: string;
+};
+export type RegistrationStatus = "New" | "Reviewed" | "Contacted" | "Approved" | "Rejected";

@@ -1,0 +1,2 @@
+"use client";
+export default function ErrorPage({ reset }: { error: Error & { digest?: string }; reset: () => void }) { return <main className="grid min-h-screen place-items-center px-6 pt-24 text-center"><div><p className="text-lime">Something went wrong</p><h1 className="mt-3 font-display text-4xl">We hit an unexpected issue</h1><button onClick={() => reset()} className="mt-6 rounded-full bg-lime px-5 py-3 font-semibold text-ink">Try again</button></div></main> }
