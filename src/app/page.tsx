@@ -3,10 +3,10 @@ import { getPublicContent } from "@/lib/content";
 import { Button, SectionLabel } from "@/components/ui";
 import { ServiceCards } from "@/components/service-cards";
 import { CapabilitiesTicker, ScrollReveal } from "@/components/scroll-effects";
-import { pageMetadata } from "@/lib/seo";
+import { brandName, homepageStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
-  "Kinetro Labs | Code the Future",
+  `${brandName} | Code the Future`,
   "Kinetro Labs delivers IT solutions, AI integration and digital growth services to help businesses build smarter workflows and stronger digital experiences.",
   "/",
 );
@@ -14,7 +14,12 @@ export const metadata = pageMetadata(
 export default async function Home() {
   const { content, services } = await getPublicContent();
   const contact = [content.contactEmail, content.whatsapp, content.address].filter(Boolean);
+  const structuredData = homepageStructuredData(content.about);
   return <main>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
+    />
     <section className={`grid-bg relative isolate min-h-[min(760px,92svh)] overflow-hidden px-4 pb-4 pt-24 sm:px-6 md:pb-6 md:pt-28 xl:px-10 ${content.heroBackgroundImage ? "hero-has-background" : ""}`}>
       {content.heroBackgroundImage && <div aria-hidden="true" className="hero-background-photo" style={{ backgroundImage: `url("${content.heroBackgroundImage}")` }} />}
       <div className="hero-layout relative z-10 mx-auto flex w-full items-center">
