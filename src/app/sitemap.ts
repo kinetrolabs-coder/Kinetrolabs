@@ -4,6 +4,17 @@ import { siteOrigin } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
+// Dates are based on the latest Git commit that changed each page's content.
+// If a future discovered route has no entry here, use the last verified public
+// content date instead of implying that it was modified at build time.
+const lastModifiedByPath: Record<string, Date> = {
+  "/": new Date("2026-11-21T00:00:00.000Z"),
+  "/privacy-policy": new Date("2026-11-21T00:00:00.000Z"),
+  "/register": new Date("2026-11-21T00:00:00.000Z"),
+  "/terms": new Date("2026-11-21T00:00:00.000Z"),
+};
+const lastVerifiedPublicContentDate = new Date("2026-11-21T00:00:00.000Z");
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = new Map(publicRoutes.map((route) => [route.path, route]));
 
@@ -13,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     return {
       url: path === "/" ? siteOrigin : new URL(path, siteOrigin).toString(),
+      lastModified: lastModifiedByPath[path] ?? lastVerifiedPublicContentDate,
       changeFrequency: isLegalPage ? "yearly" : isHome ? "weekly" : "monthly",
       priority: isHome ? 1 : isLegalPage ? 0.4 : 0.7,
     };
