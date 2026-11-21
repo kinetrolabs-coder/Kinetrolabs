@@ -3,6 +3,13 @@ import { getPublicContent } from "@/lib/content";
 import { Button, SectionLabel } from "@/components/ui";
 import { ServiceCards } from "@/components/service-cards";
 import { CapabilitiesTicker, ScrollReveal } from "@/components/scroll-effects";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata(
+  "Kinetro Labs | Code the Future",
+  "Kinetro Labs delivers IT solutions, AI integration and digital growth services to help businesses build smarter workflows and stronger digital experiences.",
+  "/",
+);
 
 export default async function Home() {
   const { content, services } = await getPublicContent();

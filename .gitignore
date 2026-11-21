@@ -4,6 +4,7 @@ node_modules
 .env*.local
 coverage
 *.tsbuildinfo
+/src/lib/public-routes.generated.ts
 supabase/.temp
 data/registrations.json
 data/site-content.json
