@@ -1,4 +1,5 @@
 import type { Service, SiteContent } from "@/types";
+import { cache } from "react";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { getAdminClient } from "@/lib/supabase/server";
@@ -44,7 +45,7 @@ async function readStoredContent(): Promise<StoredContent> {
   }
 }
 
-export async function getPublicContent() {
+export const getPublicContent = cache(async function getPublicContent() {
   const client = getAdminClient();
   if (client) {
     const { data } = await client.from("website_content").select("content").eq("section_key", "site_snapshot").maybeSingle();
@@ -54,7 +55,7 @@ export async function getPublicContent() {
     }
   }
   return readStoredContent();
-}
+});
 
 export async function saveSiteContent(data: StoredContent) {
   const client = getAdminClient();

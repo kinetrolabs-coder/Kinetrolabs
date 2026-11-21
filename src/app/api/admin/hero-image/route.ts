@@ -3,6 +3,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { cookies } from "next/headers";
 import { verifyAdminToken } from "@/lib/admin-auth";
+import { getClientIp, rateLimit } from "@/lib/security";
 import { getAdminClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
@@ -14,9 +15,19 @@ const imageTypes: Record<string, string> = {
   "image/avif": "avif"
 };
 
+function matchesImageType(type: string, bytes: Buffer) {
+  if (type === "image/jpeg") return bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
+  if (type === "image/png") return bytes.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]));
+  if (type === "image/webp") return bytes.toString("ascii", 0, 4) === "RIFF" && bytes.toString("ascii", 8, 12) === "WEBP";
+  if (type === "image/avif") return bytes.toString("ascii", 4, 8) === "ftyp" && ["avif", "avis"].includes(bytes.toString("ascii", 8, 12));
+  return false;
+}
+
 export async function POST(request: Request) {
   const token = (await cookies()).get("sk_admin_session")?.value;
   if (!verifyAdminToken(token)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const limit = rateLimit(`admin-image:${getClientIp(request)}`, 10, 15 * 60 * 1000);
+  if (!limit.success) return NextResponse.json({ error: "Too many uploads. Try again later." }, { status: 429 });
 
   try {
     const form = await request.formData();
@@ -27,6 +38,7 @@ export async function POST(request: Request) {
     if (file.size > maxImageSize) return NextResponse.json({ error: "The image must be 4 MB or smaller." }, { status: 413 });
 
     const bytes = Buffer.from(await file.arrayBuffer());
+    if (!matchesImageType(file.type, bytes)) return NextResponse.json({ error: "The file contents do not match the selected image type." }, { status: 400 });
     const client = getAdminClient();
     let imageUrl: string;
 

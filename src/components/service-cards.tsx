@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Bot, Code2, Megaphone, Sparkles, Zap } from "lucide-react";
 import type { Service } from "@/types";
+import { AgentDemoButton } from "@/components/agent-demo-button";
 
 const icons = { Code2, Sparkles, Megaphone };
 
@@ -34,7 +35,10 @@ export function ServiceCards({ services }: { services: Service[] }) {
           <div className="rounded-2xl border border-lime/25 bg-lime/10 p-3.5 text-lime transition duration-300 group-hover:rotate-6 group-hover:scale-110"><Icon className="h-6 w-6" /></div>
         </div>
         <div className="relative z-10"><h3 className="font-display text-2xl font-semibold tracking-tight">{title}</h3><p className="mt-3 min-h-14 leading-7 text-paper/60">{service.description}</p></div>
-        <a href="/register" className="relative z-10 mt-6 inline-flex items-center text-sm font-semibold text-lime">Let's build it <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1.5" /></a>
+        <div className="relative z-10 mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+          {isAiService && <AgentDemoButton />}
+          <a href="/register" className="inline-flex items-center text-sm font-semibold text-lime">Let's build it <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1.5" /></a>
+        </div>
         <span aria-hidden="true" className="service-card__accent pointer-events-none absolute -bottom-10 -right-8 h-40 w-40 rounded-full border border-lime/10 transition duration-500 group-hover:scale-125 group-hover:border-lime/30" />
       </motion.article>;
     })}

@@ -3,9 +3,9 @@
 import { motion, useReducedMotion, useScroll } from "framer-motion";
 import type { ReactNode } from "react";
 
-export function ScrollReveal({ children, className = "" }: { children: ReactNode; className?: string }) {
+export function ScrollReveal({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
   const reduceMotion = useReducedMotion();
-  return <motion.div className={className} initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .18 }} transition={{ duration: .65, ease: [.2, .75, .2, 1] }}>{children}</motion.div>;
+  return <motion.div className={className} initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .18 }} transition={{ duration: .65, delay: reduceMotion ? 0 : delay, ease: [.2, .75, .2, 1] }}>{children}</motion.div>;
 }
 
 export function ScrollProgress() {

@@ -43,7 +43,14 @@ export default function RegisterPage() {
     try {
       const response = await fetch("/api/registrations", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ ...result.data, captchaToken: captcha.token }) });
       const body = await response.json();
-      setMessage(response.ok ? `Registration received. Your ID is ${body.registrationNumber}.` : (body.error ?? "Something went wrong."));
+      if (response.ok) {
+        const emailMessage = body.emailStatus?.user
+          ? " A confirmation email has been sent to your email address."
+          : " We could not send the confirmation email; our team has been notified to follow up.";
+        setMessage(`Registration received. Your ID is ${body.registrationNumber}.${emailMessage}`);
+      } else {
+        setMessage(body.error ?? "Something went wrong.");
+      }
       if (!response.ok) await refreshCaptcha();
     } catch {
       setMessage("We could not send your registration. Please try again.");

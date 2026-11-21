@@ -6,7 +6,7 @@ import { Menu, MoveUpRight, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui";
 
-const links = [["About", "/#about"], ["Services", "/#services"], ["Contact", "/#contact"]];
+const links = [["About", "/#about"], ["Services", "/#services"], ["Why Us", "/#why-us"], ["Contact", "/#contact"]];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
