@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ScrollProgress } from "@/components/scroll-effects";
+import { AgentDemoButton } from "@/components/agent-demo-button";
 import { brandName, siteOrigin } from "@/lib/seo";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -30,4 +31,4 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
 };
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="en"><body className={`${inter.variable} ${space.variable}`}><ScrollProgress /><Navbar />{children}<Footer /></body></html>; }
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="en" data-scroll-behavior="smooth"><body className={`${inter.variable} ${space.variable}`}><ScrollProgress /><Navbar />{children}<Footer /><AgentDemoButton /></body></html>; }

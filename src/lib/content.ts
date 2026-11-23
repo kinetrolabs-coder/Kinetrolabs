@@ -6,7 +6,7 @@ import { getAdminClient } from "@/lib/supabase/server";
 
 export const defaultContent: SiteContent = {
   heroHeadline: "Code The Future",
-  heroDescription: "We turn ambitious ideas into digital products, intelligent tools and brand experiences built to move your business forward.",
+  heroDescription: "We build digital products, intelligent AI solutions, and memorable brand experiences that help your business grow.",
   heroBackgroundImage: "/images/hero-ai-lightbulb.svg",
   about: "Kinetro Labs is a technology and digital solutions agency helping businesses grow, innovate and build a stronger digital presence through IT solutions, AI technologies and social media services.",
   registrationHeading: "Let's build what comes next.",

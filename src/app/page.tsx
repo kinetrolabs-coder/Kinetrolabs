@@ -20,18 +20,19 @@ export default async function Home() {
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
     />
-    <section className={`grid-bg relative isolate min-h-[min(760px,92svh)] overflow-hidden px-4 pb-4 pt-24 sm:px-6 md:pb-6 md:pt-28 xl:px-10 ${content.heroBackgroundImage ? "hero-has-background" : ""}`}>
+    <section className={`grid-bg relative isolate min-h-[min(760px,92svh)] px-4 pb-4 pt-24 sm:px-6 md:pb-6 md:pt-28 xl:px-10 ${content.heroBackgroundImage ? "hero-has-background" : ""}`}>
       {content.heroBackgroundImage && <div aria-hidden="true" className="hero-background-photo" style={{ backgroundImage: `url("${content.heroBackgroundImage}")` }} />}
       <div className="hero-layout relative z-10 mx-auto flex w-full items-center">
-        <div className="animate-float-in">
-          <h1 className="hero-title font-display font-bold tracking-[-.075em]"><span>Code</span><span className="hero-title__future">The Future</span></h1>
-          <div className="mt-8 flex flex-wrap items-center gap-3"><Button href="/register" className="min-h-12 bg-lime text-ink shadow-xl shadow-lime/25">Start a project <ArrowRight className="ml-2 h-4 w-4" /></Button></div>
+        <div className="animate-float-in max-w-3xl">
+          <h1 className="hero-title font-display font-bold tracking-[-.025em]"><span>Code</span><span className="hero-title__future">The Future</span></h1>
+          <p className="mt-6 max-w-2xl text-sm leading-6 text-paper/70 sm:text-base sm:leading-7">{content.heroDescription}</p>
+          <div className="mt-8 flex flex-wrap items-center gap-3"><Button href="/register" className="min-h-12 bg-lime text-ink shadow-xl shadow-lime/25">Start a Project <ArrowRight className="ml-2 h-4 w-4" /></Button></div>
         </div>
       </div>
     </section>
     <section id="about" className="about-section w-full px-3 py-8 sm:px-4 md:px-6 md:py-10">
       <ScrollReveal className="about-panel grid gap-8 rounded-[2rem] border border-white/10 p-7 md:grid-cols-[.7fr_1fr] md:p-12">
-        <div><SectionLabel>About Kinetro</SectionLabel><h2 className="font-display text-4xl font-semibold leading-tight tracking-tight md:text-5xl">Good ideas deserve <span className="text-gradient">great execution</span></h2></div>
+        <div><SectionLabel>About Kinetro Labs</SectionLabel><h2 className="font-display text-4xl font-semibold leading-tight tracking-tight md:text-5xl">Good ideas deserve <span className="text-gradient">great execution</span></h2></div>
         <p className="max-w-2xl self-end text-lg leading-8 text-paper/65 md:text-xl">{content.about}</p>
       </ScrollReveal>
     </section>
@@ -63,6 +64,6 @@ export default async function Home() {
         </div>
       </div>
     </section>
-    <section id="contact" className="w-full px-3 py-8 sm:px-4 md:px-6 md:py-10"><ScrollReveal><div className="contact-panel w-full overflow-hidden rounded-[2rem] border border-blue-200/30 bg-gradient-to-br from-blue-400 via-blue-600 to-blue-800 p-8 text-white shadow-2xl shadow-blue-950/30 md:p-12"><div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end"><div><p className="text-xs font-bold uppercase tracking-[.24em] text-white/75">Your next move starts here</p><h2 className="mt-4 max-w-xl font-display text-4xl font-semibold leading-tight tracking-tight md:text-6xl">Let's make something meaningful</h2></div><Button href="/register" className="bg-white text-blue-950 shadow-lg shadow-blue-950/20">Start a conversation <ArrowRight className="ml-2 h-4 w-4" /></Button></div>{contact.length > 0 && <div className="mt-8 border-t border-white/20 pt-5 text-sm text-white/80">{contact.join(" / ")}</div>}</div></ScrollReveal></section>
+    <section id="contact" className="w-full px-3 py-8 sm:px-4 md:px-6 md:py-10"><ScrollReveal><div className="contact-panel w-full overflow-hidden rounded-[2rem] border border-blue-200/30 bg-gradient-to-br from-blue-400 via-blue-600 to-blue-800 p-8 text-white shadow-2xl shadow-blue-950/30 md:p-12"><div className="grid gap-6 md:max-w-[58rem] md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-8"><div className="max-w-3xl"><p className="text-xs font-bold uppercase tracking-[.24em] text-white/75">Your next move starts here</p><h2 className="mt-4 max-w-2xl font-display text-4xl font-semibold leading-[1.12] tracking-tight md:text-6xl">Let's make something meaningful</h2></div><Button href="/register" className="bg-white text-blue-950 shadow-lg shadow-blue-950/20">Start a conversation <ArrowRight className="ml-2 h-4 w-4" /></Button></div>{contact.length > 0 && <div className="mt-8 border-t border-white/20 pt-5 text-sm text-white/80">{contact.join(" / ")}</div>}</div></ScrollReveal></section>
   </main>;
 }

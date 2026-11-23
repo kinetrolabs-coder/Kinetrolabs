@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, MoveUpRight, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui";
 
-const links = [["About", "/#about"], ["Services", "/#services"], ["Why Us", "/#why-us"], ["Contact", "/#contact"]];
+const links = [["Home", "/"], ["About", "/#about"], ["Services", "/#services"], ["Why Us", "/#why-us"], ["Contact", "/#contact"]];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -19,9 +19,9 @@ export function Navbar() {
       <nav className="site-header__nav absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/[.07] bg-gradient-to-b from-white/[.055] to-white/[.015] p-1 lg:flex" aria-label="Main navigation">
         {links.map(([label, href]) => <a key={href} href={href} className="site-header__link rounded-full px-5 py-2.5 text-sm font-medium text-paper/70 transition-colors hover:text-white">{label}</a>)}
       </nav>
-      <div className="hidden lg:block"><Button href="/register" className="site-header__cta bg-lime px-5 py-3 text-ink shadow-lg shadow-lime/25">Register here <MoveUpRight className="ml-2 h-4 w-4" /></Button></div>
+      <div className="hidden lg:block"><Button href="/register" className="site-header__cta bg-lime px-5 py-3 text-ink shadow-lg shadow-lime/25">Register here</Button></div>
       <button className="site-header__menu rounded-xl border border-white/10 p-2.5 text-paper transition hover:border-lime/50 hover:bg-lime/10 hover:text-lime lg:hidden" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
     </div>
-    {open && <nav className="site-header__mobile mx-auto mt-2 w-full rounded-2xl border border-white/10 p-4 lg:hidden" aria-label="Mobile navigation">{links.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)} className="block rounded-xl px-3 py-3 text-sm font-medium text-paper/80 transition hover:bg-white/[.06] hover:text-white">{label}</a>)}<Button href="/register" className="mt-3 w-full bg-lime text-ink">Register here <MoveUpRight className="ml-2 h-4 w-4" /></Button></nav>}
+    {open && <nav className="site-header__mobile mx-auto mt-2 w-full rounded-2xl border border-white/10 p-4 lg:hidden" aria-label="Mobile navigation">{links.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)} className="block rounded-xl px-3 py-3 text-sm font-medium text-paper/80 transition hover:bg-white/[.06] hover:text-white">{label}</a>)}<Button href="/register" className="mt-3 w-full bg-lime text-ink">Register here</Button></nav>}
   </header>;
 }
