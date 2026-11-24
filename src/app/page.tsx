@@ -20,7 +20,7 @@ export default async function Home() {
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
     />
-    <section className={`grid-bg relative isolate min-h-[min(760px,92svh)] px-4 pb-4 pt-24 sm:px-6 md:pb-6 md:pt-28 xl:px-10 ${content.heroBackgroundImage ? "hero-has-background" : ""}`}>
+    <section className={`grid-bg relative isolate px-4 pb-5 pt-24 sm:px-6 md:pt-28 xl:px-10 ${content.heroBackgroundImage ? "hero-has-background" : ""}`}>
       {content.heroBackgroundImage && <div aria-hidden="true" className="hero-background-photo" style={{ backgroundImage: `url("${content.heroBackgroundImage}")` }} />}
       <div className="hero-layout relative z-10 mx-auto flex w-full items-center">
         <div className="animate-float-in max-w-3xl">
@@ -30,7 +30,7 @@ export default async function Home() {
         </div>
       </div>
     </section>
-    <section id="about" className="about-section w-full px-3 py-8 sm:px-4 md:px-6 md:py-10">
+    <section id="about" className="about-section w-full px-3 pb-8 pt-4 sm:px-4 md:px-6 md:pb-10 md:pt-4">
       <ScrollReveal className="about-panel grid gap-8 rounded-[2rem] border border-white/10 p-7 md:grid-cols-[.7fr_1fr] md:p-12">
         <div><SectionLabel>About Kinetro Labs</SectionLabel><h2 className="font-display text-4xl font-semibold leading-tight tracking-tight md:text-5xl">Good ideas deserve <span className="text-gradient">great execution</span></h2></div>
         <p className="max-w-2xl self-end text-lg leading-8 text-paper/65 md:text-xl">{content.about}</p>
